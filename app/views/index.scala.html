@@ -1,27 +1,130 @@
-@(tasks: List[Task] , taskForm: Form[Task])
+@(users: List[User] , userForm: Form[User])
 
 @import helper._
 
 @main("Todo list") {
-    
-    <h1>@tasks.size()  task(s)</h1>
-    
-    <ul>
-    	@for(task <- tasks){
-    		<li>
-    			@task.label
 
-    			@form(routes.Application.deleteTask(task.id)){
-    				<input type="submit" value="Delete">
-    			}
-    		</li>
-    	}
-    </ul>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="brand" href="#">ElectroCan</a>
+                <div class="nav-collapse collapse">
+                    <p class="navbar-text pull-right">
+                        Usuario : <a href="#" class="navbar-link">Administrador</a>
+                    </p>
+                        <!--<ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>-->
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
 
-    <h2>Add a new task</h2>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span3">
+                <div class="well sidebar-nav">
+                    <ul class="nav nav-list">
+                        <li class="nav-header">Contrato</li>
+                        <li class="active"><a href="#">Cliente</a></li>
+                        <li><a href="fluid.html">Medidor</a></li>
+                        <li class="nav-header">Lectura</li>
+                        <li><a href="#">Consumo</a></li>
+                        <li><a href="#">Periodo</a></li>
+                        <li class="nav-header">Facturacion</li>
+                        <li><a href="#">Recibo</a></li>
+                        <li><a href="#">Configuracion</a></li>
+                        <li><a href="#">Link</a></li>
+                        <li class="nav-header">Tarifarios</li>
+                        <li><a href="#">Tarifa</a></li>
+                        <li><a href="#">Tarifario</a></li>
+                        <li><a href="#">Unidad</a></li>
+                    </ul>
+                </div><!--/.well -->
+            </div><!--/span-->
+            <div class="span9">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Username</th>
+                            <th colspan="2">Operation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <p>
+                            <button class="btn" type="button" data-toggle="modal" data-target="#myModal" ><i class="icon-plus"></i> Nuevo</button>
+                        </p>
 
-    @form(routes.Application.newTask()){
-    	@inputText(taskForm("label"))
-    	<input type="submit" value="Create">
-    }
+                        <!-- Modal -->
+                        <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        @form(routes.Application.newUser()){
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h3 id="myModalLabel">Usuario</h3>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-horizontal">
+                                <div class="control-group">
+                                    <label class="control-label">Primer Nombre</label>
+                                    <div class="controls">
+                                        <input type="text" name="firstName">
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <label class="control-label" for="inputEmail">Segundo Nombre</label>
+                                    <div class="controls">
+                                        <input type="text" name="secondName">
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                     <label class="control-label" for="inputEmail">Usuario</label>
+                                     <div class="controls">
+                                        <input type="text" name="userName">
+                                     </div>
+                                </div>
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit">Aceptar</button>
+                                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                            </div>
+                            }
+                        </div>
+
+                        @for(user <- users){
+                            <tr>
+                                <td>@user.id</td>
+                                <td>@user.firstName</td>
+                                <td>@user.secondName</td>
+                                <td>@user.userName</td>
+                                <td><i class="icon-pencil"></i></td>
+                                <td><i class="icon-remove"></i></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div><!--/span-->
+        </div><!--/row-->
+
+        <hr>
+
+        <footer>
+            <p>&copy; Dexter 2013</p>
+        </footer>
+
+    </div>
 }

@@ -28,8 +28,7 @@ public class Task extends Model{
 		find.ref(id).delete();
 	}
 
-	public static Finder<Long,Task> find = new Finder(
-		Long.class,Task.class);
+	public static Finder<Long,Task> find = new Finder(Long.class,Task.class);
 
 
 }
